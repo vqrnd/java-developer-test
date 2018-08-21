@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 mongo_cmd="db.users.insert(["
 test_users_count=10
