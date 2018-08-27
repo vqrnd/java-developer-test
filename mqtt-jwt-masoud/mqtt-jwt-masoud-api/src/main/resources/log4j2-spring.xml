@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+
+	<Appenders>
+		<Console name="console-appender" target="SYSTEM_OUT">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+		</Console>
+		<RollingFile name="root-file-appender"
+			fileName="/masoud/logs/root.log"
+			filePattern="/masoud/logs/archives/root.log.%d{yyyy-MM-dd}.gz">
+			<PatternLayout
+				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy max="14" />
+		</RollingFile>
+		<RollingFile name="jwt-file-appender"
+			fileName="/masoud/logs/jwt.log"
+			filePattern="/masoud/logs/archives/jwt.log.%d{yyyy-MM-dd}.gz">
+			<PatternLayout
+				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy max="30" />
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+		<Logger name="com.vq.jwt.masoud.api.activemq" level="debug"
+			additivity="false">
+			<AppenderRef ref="jwt-file-appender" />
+			<AppenderRef ref="console-appender" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="root-file-appender" />
+			<AppenderRef ref="console-appender" />
+		</Root>
+	</Loggers>
+
+</Configuration>
